@@ -62,7 +62,7 @@ function Portfolio() {
           />
         </Col>
         <Col>
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "right" }}>
             <Project></Project>
           </div>
 
@@ -71,7 +71,7 @@ function Portfolio() {
       </Row>
       <Row>
         <Col>
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "right" }}>
             학력 목록, 수상이력 목록, 프로젝트 목록, 자격증 목록 만들기
           </div>
         </Col>

@@ -1,10 +1,12 @@
 import React from "react";
+import ProjectFrame from "./ProjectFrame"
 
 function Project() {
 
     return <>
-        <div>test1</div>
+        <ProjectFrame></ProjectFrame>
         <div>test2</div>
+        <ProjectFrame></ProjectFrame>
     </>
 }
 
