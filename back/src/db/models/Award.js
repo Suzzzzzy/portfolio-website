@@ -16,19 +16,9 @@ class Award {
     return award;
   }
 
-  // 사용자 상장 불러오기
-  static async findById({ _id }) {
-    const award = await AwardModel.findOne({ _id: id });
-    return award;
-  }
-  // 사용자 전체 상장 불러오기
-  static async findAll({ Null }) {
-    const awards = await AwardModel.find({ Null });
-    return awards;
-  }
   // 사용자 상장 수정하기
-  static async update({ user_id, fieldToUpdate, newValue }) {
-    const filter = { Null }; //(id: _id)?
+  static async update({ awardId, fieldToUpdate, newValue }) {
+    const filter = { id: awardId }; 
     const update = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
       
