@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const Award = new Schema(
+const AwardSchema = new Schema(
   {
     title: {
       type: String,

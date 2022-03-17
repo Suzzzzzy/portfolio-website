@@ -3,7 +3,6 @@ import express from "express";
 import { userAuthRouter } from "./routers/userRouter";
 import {awardRouter} from "./routers/awardRouter";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
-import { awardRouter } from "./routers/awardRouter";
 
 const app = express();
 

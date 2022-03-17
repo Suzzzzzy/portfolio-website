@@ -10,6 +10,12 @@ class Award {
     return createdNewAward;
   }
 
+  // 선택한 상장 불러오기
+  static async findByName({ title }) {
+    const award = await AwardModel.findOne({ title });
+    return award;
+  }
+
   // 사용자 상장 불러오기
   static async findById({ _id }) {
     const award = await AwardModel.findOne({ _id: id });
