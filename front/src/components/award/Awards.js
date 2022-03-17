@@ -7,9 +7,7 @@ import * as Api from "../../api";
 function Awards({ portfolioOwnerId, isEditable }) {
 	
 	const [isAdding, setIsAdding] = useState(false);
-	
 	const [awards, setAwards] = useState(null);
-	
 	const awardList = awards.map((award) => <Award award={award} isEditable={isEditable} setAwards={setAwards} />);
 
 	useEffect(() => {

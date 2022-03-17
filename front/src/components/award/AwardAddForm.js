@@ -62,7 +62,7 @@ function AwardAddForm({ portfolioOwnerId, setIsAdding, setAwards }) {
 				<Form.Group as={Row} className="mt-3">
 					<Col xs="auto">
 						<DatePicker
-							selected={whenDate}
+							selected={when_date}
 							onChange={(date) => setWhenDate(date)}
 						/>
 					</Col>

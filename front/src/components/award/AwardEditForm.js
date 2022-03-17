@@ -6,13 +6,9 @@ import * as Api from "../../api";
 function AwardEditForm({ award, setIsEditing, setAwards }) {
 
   const [title, setTitle] = useState(award.title);
-  
   const [description, setDescription] = useState(award.description);
-
 	const [authority, setAuthority] = useState(award.authority);
-
 	const [whenDate, setWhenDate] = useState(new Date(award.when_date));
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,7 +61,7 @@ function AwardEditForm({ award, setIsEditing, setAwards }) {
 					<Form.Group as={Row} className="mt-3">
 						<Col xs="auto">
 							<DatePicker
-								selected={whenDate}
+								selected={when_date}
 								onChange={(date) => setWhenDate(date)}
 							/>
 						</Col>
