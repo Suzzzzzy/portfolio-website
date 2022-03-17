@@ -1,7 +1,7 @@
 import { Card, Row, Button, Col } from "react-bootstrap";
 
 function AwardCard({ award, setIsEditing, isEditable }) {
-  const { title, description } = award;
+  const { title, description, authority, when_date } = award;
 
   return (
     <>
