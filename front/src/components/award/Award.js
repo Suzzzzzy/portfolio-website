@@ -3,7 +3,6 @@ import AwardEditForm from './AwardEditForm';
 import AwardCard from './AwardCard';
 
 function Award({ award, isEditable, setAwards }) {
-	// useState 통해 isEditing 상태 생성
 	const [ isEditing, setIsEditing ] = useState(false);
 
 	return (
