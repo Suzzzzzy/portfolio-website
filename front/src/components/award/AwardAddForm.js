@@ -16,7 +16,7 @@ function AwardAddForm({ portfolioOwnerId, setIsAdding, setAwards }) {
 			title,
 			description,
 			authority,
-			when_date  //when_date 어디에 있는거지? --> 백엔드 api문서에 있음, 아직 업뎃 안됨
+			when_date
 		};
 
 		try {
