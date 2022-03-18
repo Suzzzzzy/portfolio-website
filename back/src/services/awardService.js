@@ -4,11 +4,11 @@ import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
 
 class awardService {
-  static async addAward({ title, description, authority, when_date}) {
+  static async addAward({ _id, title, description, authority, when_date}) {
     
     // 상장 추가하기(CREATE)
       // 상장 중복 확인
-    const award = await Award.findByName({title});
+    const award = await Award.findById({_id});
       if (award) {
         const errorMessage = "이미 존재하는 수상정보입니다."
         return { errorMessage }
@@ -21,34 +21,34 @@ class awardService {
   }
 
    // 상장 불러오기
-   static async getAwards({awardId}) {
-     const awards = await Award.findById({awardId});
-     return awards;
+   static async getAward({_id}) {
+     const award = await Award.findById({_id});
+     return award;
    }
 
    // 상장 수정하기
-   static async setAward({awardId, toUpdate}) {
-     let award = await Award.findById(awardId);
+   static async setAward({_id, toUpdate}) {
+     let award = await Award.findById(_id);
 
      if (toUpdate.title) {
        const fieldToUpdate = "title";
        const newValue = toUpdate.title;
-       award = await Award.update({awardId, fieldToUpdate, newValue})
+       award = await Award.update({_id, fieldToUpdate, newValue})
      }
      if (toUpdate.description) {
       const fieldToUpdate = "description";
       const newValue = toUpdate.description;
-      award = await Award.update({awardId, fieldToUpdate, newValue})
+      award = await Award.update({_id, fieldToUpdate, newValue})
     }
     if (toUpdate.authority) {
       const fieldToUpdate = "authority";
       const newValue = toUpdate.authority;
-      award = await Award.update({awardId, fieldToUpdate, newValue})
+      award = await Award.update({_id, fieldToUpdate, newValue})
     }
     if (toUpdate.when_date) {
       const fieldToUpdate = "when_date";
       const newValue = toUpdate.when_date;
-      award = await Award.update({awardId, fieldToUpdate, newValue})
+      award = await Award.update({_id, fieldToUpdate, newValue})
     }
     return award; 
    } 

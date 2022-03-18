@@ -11,14 +11,14 @@ class Award {
   }
 
   // 선택한 상장 불러오기
-  static async findByName({ title }) {
-    const award = await AwardModel.findOne({ title });
+  static async findById({ _id }) {
+    const award = await AwardModel.findOne({ _id: _id });
     return award;
   }
 
   // 사용자 상장 수정하기
-  static async update({ awardId, fieldToUpdate, newValue }) {
-    const filter = { id: awardId }; 
+  static async update({ _id, fieldToUpdate, newValue }) {
+    const filter = { _id: _id }; 
     const update = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
       

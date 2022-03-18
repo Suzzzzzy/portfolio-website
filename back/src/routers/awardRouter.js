@@ -4,7 +4,6 @@ import { login_required } from "../middlewares/login_required"
 import { awardService } from "../services/awardService"
 
 const awardRouter = Router();
-
 // 상장 추가하기(Create)
 awardRouter.post("/award/create", async function (req, res, next) {
   try {
@@ -29,6 +28,7 @@ awardRouter.post("/award/create", async function (req, res, next) {
 
     if (newAward.errorMessage) {
       throw new Error(newAward.errorMessage);
+      
     }
 
     res.status(201).json(newAward);
@@ -36,6 +36,24 @@ awardRouter.post("/award/create", async function (req, res, next) {
     next(error);
   }
 });
+
+  //상장 조회
+awardRouter.get("/awards/:id", login_required, async function (req, res, next) {
+  try {
+    const _id = req.params.id;
+    const award = await awardService.getAward({ _id });
+
+    if (award.errorMessage) {
+      throw new Error(award.errorMessage);
+    }
+
+    res.status(200).json(award);
+  } catch (error) {
+    next(error);
+  }
+}
+);
+
 
   //상장 수정하기(Update)
 awardRouter.put("/awards/:id", login_required, async function (req, res, next) {
