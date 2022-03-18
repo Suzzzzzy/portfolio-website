@@ -67,7 +67,6 @@ yarn start
     - MVP 별로 5개 파일이 있어야 하며, 현재는 User MVP 파일만 있습니다.
 
 2. 이외 폴더는 아래와 같습니다.
-
 - src/middlewares:
   - jwt토큰을 다루는 미들웨어인 login_required.js
   - 학습 편의를 위해 일괄 http 400 코드로 에러를 변환하는 에러핸들러인 errorMiddleware.js
