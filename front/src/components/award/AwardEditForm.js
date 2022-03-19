@@ -3,7 +3,7 @@ import { Button, Form, Card, Col, Row } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import * as Api from '../../api';
 
-function AwardEditForm({ award, setIsEditing, setAwards }) {
+function AwardEditForm({ currentAward, setIsEditing, setAwards }) {
 
   const [title, setTitle] = useState(currentAward.title);
   const [description, setDescription] = useState(currentAward.description);
@@ -13,7 +13,7 @@ function AwardEditForm({ award, setIsEditing, setAwards }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const user_id = currentCertificate.user_id;
+    const user_id = currentAward.user_id;
     const when_date = whenDate.toISOString().split("T")[0];
 
     await Api.put(`awards/${currentAward.id}`, {
