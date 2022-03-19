@@ -3,10 +3,9 @@ import { Form, Row, Col, Button } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import * as Api from '../../api';
 
-function AwardAddForm({ portfolioOwnerId, setIsAdding, setAwards }) {
+function AwardAddForm({ portfolioOwnerId, setAwards, setIsAdding }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [authority, setAuthority] = useState("");
   const [whenDate, setWhenDate] = useState(new Date());
 
   const handleSubmit = async (e) => {
@@ -19,7 +18,6 @@ function AwardAddForm({ portfolioOwnerId, setIsAdding, setAwards }) {
       user_id,
       title,
       description,
-      authority,
       when_date,
     });
 
@@ -47,15 +45,6 @@ function AwardAddForm({ portfolioOwnerId, setIsAdding, setAwards }) {
           placeholder="상세내역"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-        />
-      </Form.Group>
-
-      <Form.Group controlId="awardAddAuthority" className="mt-3">
-        <Form.Control
-          type="text"
-          placeholder="발급기관"
-          value={authority}
-          onChange={(e) => setAuthority(e.target.value)}
         />
       </Form.Group>
 
