@@ -37,7 +37,7 @@ awardRouter.post("/award/create", async function (req, res, next) {
   }
 });
 
-  //상장 조회
+  // 사용자의 상장 한개 조회
 awardRouter.get("/awards/:id", login_required, async function (req, res, next) {
   try {
     const _id = req.params.id;
@@ -48,6 +48,23 @@ awardRouter.get("/awards/:id", login_required, async function (req, res, next) {
     }
 
     res.status(200).json(award);
+  } catch (error) {
+    next(error);
+  }
+}
+);
+
+ // 사용자가 등록한 상장list 조회
+ awardRouter.get("/awardlist/:user_id", login_required, async function (req, res, next) {
+  try {
+    const user_id = req.params.id;
+    const awardlist = await awardService.getAward({ user_id });
+
+    if (awardlist.errorMessage) {
+      throw new Error(awardlist.errorMessage);
+    }
+
+    res.status(200).json(awardlist);
   } catch (error) {
     next(error);
   }
@@ -80,6 +97,23 @@ awardRouter.put("/awards/:id", login_required, async function (req, res, next) {
       next(error);
     }
   }
+);
+
+// 상장 삭제하기
+awardRouter.delete("/award/:id", login_required, async function (req, res, next) {
+  try {
+    const _id = req.params.id;
+    const deleted = await awardService.deleteAward({ _id });
+
+    if (deleted.errorMessage) {
+      throw new Error(deleted.errorMessage);
+    }
+
+    res.status(200).json(deleted, "삭제가 완료되었습니다.");
+  } catch (error) {
+    next(error);
+  }
+}
 );
 
 export { awardRouter };

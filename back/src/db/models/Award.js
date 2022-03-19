@@ -10,26 +10,39 @@ class Award {
     return createdNewAward;
   }
 
-  // 선택한 상장 불러오기
-  static async findById({ _id }) {
-    const award = await AwardModel.findOne({ _id: _id });
-    return award;
-  }
+// 선택한 상장 불러오기
+static async findById({ _id }) {
+  const award = await AwardModel.findOne({ _id: _id });
+  return award;
+}
 
-  // 사용자 상장 수정하기
-  static async update({ _id, fieldToUpdate, newValue }) {
-    const filter = { _id: _id }; 
-    const update = { [fieldToUpdate]: newValue };
-    const option = { returnOriginal: false };
-      
-      // 수정된게 있으면 update
-    const updatedAward = await AwardModel.findOneAndUpdate(
-      filter,
-      update,
-      option
-    );
-    return updatedAward;
-  }
+// 사용자 상장list 불러오기
+static async findByAll({ user_id }) {
+  const awardlist = await AwardModel.find({ user_id });
+  return awardlist;
+}
+
+// 사용자 상장 수정하기
+static async update({ _id, fieldToUpdate, newValue }) {
+  const filter = { _id: _id }; 
+  const update = { [fieldToUpdate]: newValue };
+  const option = { returnOriginal: false };
+    
+    // 수정된게 있으면 update
+  const updatedAward = await AwardModel.findOneAndUpdate(
+    filter,
+    update,
+    option
+  );
+  return updatedAward;
+}
+
+// 삭제하기
+static async deleteByid({ _id }) {
+  const deleted = await AwardModel.deleteOne({ _id });
+  return deleted;
+}
+
 }
 
 export { Award };
