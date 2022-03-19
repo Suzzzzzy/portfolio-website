@@ -74,7 +74,7 @@ function AwardEditForm({ currentAward, setIsEditing, setAwards }) {
           <Button variant="primary" type="submit" className="me-3">
             확인
           </Button>
-          <Button variant="secondary" onClick={() => setIsAdding(false)} >
+          <Button variant="secondary" onClick={() => setIsEditing(false)} >
             취소
           </Button>
         </Col>
