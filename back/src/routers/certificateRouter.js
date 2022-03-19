@@ -15,7 +15,7 @@ certificateRouter.post("/certificate/create", async function (req, res, next) {
     // req (request) 에서 데이터 가져오기
     const title= req.body.title;
     const description = req.body.description;
-    const when_date = req.body.when_date
+    const when_date = req.body.when_date;
 
     // 위 데이터를 Certificate db에 추가하기
     const newCertificate = await certificateService.addCertificate({
@@ -35,12 +35,12 @@ certificateRouter.post("/certificate/create", async function (req, res, next) {
   }
 });
 
-  //자격증 조회
+//자격증 조회
 
 certificateRouter.get("/certificates/:id", login_required, async function (req, res, next) {
   try {
-    const certificate_id = req.params.id;
-    const certificate = await certificateService.getCertificate({ certificate_id });
+    const _id = req.params.id;
+    const certificate = await certificateService.getCertificate({ _id });
 
     if (certificate.errorMessage) {
       throw new Error(certificate.errorMessage);
@@ -53,6 +53,23 @@ certificateRouter.get("/certificates/:id", login_required, async function (req, 
 }
 );
 
+  //사용자가 등록한 자격증List 조회
+  certificateRouter.get("/certificatelist/:certificate_id", login_required, async function (req, res, next) {
+    try {
+      const certificate_id = req.params.id;
+      const certificatelist = await certificateService.getCertificate({ certificate_id });
+
+      if (certificatelist.errorMessage) {
+        throw new Error(certificatelist.errorMessage);
+      }
+
+      res.status(200).json(certificatelist);
+    } catch (error) {
+      next(error);
+    }
+  }
+  );
+  
 
   //자격증 수정하기(Update)
 certificateRouter.put("/certificates/:id", login_required, async function (req, res, next) {
@@ -79,5 +96,23 @@ certificateRouter.put("/certificates/:id", login_required, async function (req, 
     }
   }
 );
+
+//자격증 삭제하기
+certificateRouter.delete("/certificate/:id", login_required, async function (req, res, next) {
+  try {
+    const certificate_id = req.params.id;
+    const deleted = await certificateService.deleteCertificate({ certificate_id });
+
+    if (deleted.errorMessage) {
+      throw new Error(deleted.errorMessage);
+    }
+
+    res.status(200).json(deleted, "삭제가 완료되었습니다.");
+  } catch (error) {
+    next(error);
+  }
+}
+);
+
 
 export { certificateRouter };

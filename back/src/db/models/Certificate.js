@@ -11,14 +11,20 @@ class Certificate {
   }
 
   // 선택한 자격증 불러오기
-  static async findById({ certificate_id }) {
-    const certificate = await CertificateModel.findOne({ certificate_id: certificate_id });
+  static async findById({ _id }) {
+    const certificate = await CertificateModel.findOne({ _id: _id });
     return certificate;
   }
 
-  // 사용자 자격증 수정하기
-  static async update({ certificate_id, fieldToUpdate, newValue }) {
-    const filter = { certificate_id: certificate_id }; 
+  //사용자 자격증 List 불러오기
+  static async findByAll({ user_id }) {
+      const certificatelist = await CertificateModel.find({ user_id });
+      return certificatelist;
+  }
+
+// 사용자 자격증 수정하기
+  static async update({ _id, fieldToUpdate, newValue }) {
+    const filter = { _id: _id }; 
     const update = { [fieldToUpdate]: newValue };
     const option = { returnOriginal: false };
       
@@ -30,6 +36,14 @@ class Certificate {
     );
     return updatedCertificate;
   }
+
+
+//삭제하기
+static async deleteByid ({ _id }) {
+    const deleted = await CertificateModel.deleteOne({ _id });
+    return deleted;
+}
+
 }
 
 export { Certificate };
