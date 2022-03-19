@@ -1,13 +1,28 @@
-import React from "react";
-import ProjectFrame from "./ProjectFrame"
+import React, { useState } from "react";
+import ProjectCard from "./ProjectCard";
+import ProjectEditForm from "./ProjectEditForm";
+// import * as Api from "../../api";
 
-function Project() {
+function Project({ Project, setProjects, isEditable }) {
+    const [isEditing, setIsEditing] = useState(false);
 
-    return <>
-        <ProjectFrame></ProjectFrame>
-        <div>test2</div>
-        <ProjectFrame></ProjectFrame>
-    </>
+    return (
+        <>
+            {isEditing ? (
+                <ProjectEditForm
+                    currentProject={Project}
+                    setProjects={setProjects}
+                    setIsEditing={setIsEditing}
+                />
+            ) : (
+                <ProjectCard
+                    Project={Project}
+                    isEditable={isEditable}
+                    setIsEditing={setIsEditing}
+                />
+            )}
+        </>
+    );
 }
 
 export default Project;
