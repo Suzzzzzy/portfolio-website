@@ -45,5 +45,5 @@ static async deleteByid ({ _id }) {
 }
 
 }
-
+ 
 export { Certificate };

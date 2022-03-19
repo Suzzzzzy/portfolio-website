@@ -74,5 +74,5 @@ class certificateService {
   }
 
 }
-
+ 
 export { certificateService };

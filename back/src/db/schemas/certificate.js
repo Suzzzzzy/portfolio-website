@@ -25,7 +25,7 @@ const CertificateSchema = new Schema(
         timestamps: true,
     }
 );
-
+ 
 const CertificateModel = model("Certificate", CertificateSchema);
 
 export { CertificateModel };
