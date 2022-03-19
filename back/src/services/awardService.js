@@ -70,7 +70,7 @@ class awardService {
         const errorMessage = "수상내역이 존재하지 않습니다.";
         return { errorMessage };
       }
-    return { status: "deldte!"}
+    return { status: "delete!"}
   }
 
 
