@@ -34,7 +34,7 @@ function PLAddForm({ portfolioOwnerId, setPLs, setIsAdding }) {
       <Form.Group controlId="plAddProficiency" className="mt-3">
         <Form.Control
           type="text"
-          placeholder="숙련도"
+          placeholder="ex)python, c, c++, Java..."
           value={Proficiency}
           onChange={(e) => setProficiency(e.target.value)}
         />
