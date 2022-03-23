@@ -15,14 +15,12 @@ awardRouter.post("/award/create", async function (req, res, next) {
     // req (request) 에서 데이터 가져오기
     const title= req.body.title;
     const description = req.body.description;
-    const authority = req.body.authority;
     const when_date = req.body.when_date
 
     // 위 데이터를 Award db에 추가하기
     const newAward = await awardService.addAward({
       title,
       description,
-      authority,
       when_date,
     });
 
@@ -80,7 +78,6 @@ awardRouter.put("/awards/:id", login_required, async function (req, res, next) {
       // body data 로부터 업데이트할 상장 정보를 추출함.
       const title = req.body.title ?? null;
       const description = req.body.description ?? null;
-      const authority = req.body.authority ?? null;
       const when_date = req.body.when_date ?? null;
 
       const toUpdate = { title, description, authority, when_date };

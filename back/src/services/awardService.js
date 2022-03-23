@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
 
 class awardService {
-  static async addAward({ _id, title, description, authority, when_date}) {
+  static async addAward({ _id, title, description, when_date}) {
     
     // 상장 추가하기(CREATE)
       // 상장 중복 확인
@@ -13,7 +13,7 @@ class awardService {
         const errorMessage = "이미 존재하는 수상정보입니다."
         return { errorMessage }
       }
-    const newAward = ({ title, description, authority, when_date })
+    const newAward = ({ title, description, when_date })
     const createdNewAward = await Award.create({ newAward });
     createdNewAward.errorMessage = null; // 문제 없이 db 저장 완료되었으므로 에러가 없음.
 
@@ -45,16 +45,6 @@ class awardService {
        const newValue = toUpdate.title;
        award = await Award.update({_id, fieldToUpdate, newValue})
      }
-     if (toUpdate.description) {
-      const fieldToUpdate = "description";
-      const newValue = toUpdate.description;
-      award = await Award.update({_id, fieldToUpdate, newValue})
-    }
-    if (toUpdate.authority) {
-      const fieldToUpdate = "authority";
-      const newValue = toUpdate.authority;
-      award = await Award.update({_id, fieldToUpdate, newValue})
-    }
     if (toUpdate.when_date) {
       const fieldToUpdate = "when_date";
       const newValue = toUpdate.when_date;
