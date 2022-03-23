@@ -5,7 +5,7 @@ import { awardService } from "../services/awardService"
 
 const awardRouter = Router();
 // 상장 추가하기(Create)
-awardRouter.post("/award/create", async function (req, res, next) {
+awardRouter.post("/award/create", login_required, async function (req, res, next) {
   try {
     if (is.emptyObject(req.body)) {
       throw new Error(
