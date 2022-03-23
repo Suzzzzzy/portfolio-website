@@ -43,22 +43,17 @@ class certificateService {
      if (toUpdate.title) {
        const fieldToUpdate = "title";
        const newValue = toUpdate.title;
-       award = await Certificate.update({_id, fieldToUpdate, newValue})
+       certificate = await Certificate.update({_id, fieldToUpdate, newValue})
      }
      if (toUpdate.description) {
       const fieldToUpdate = "description";
       const newValue = toUpdate.description;
-      award = await Certificate.update({_id, fieldToUpdate, newValue})
-    }
-    if (toUpdate.authority) {
-      const fieldToUpdate = "authority";
-      const newValue = toUpdate.authority;
-      award = await Award.update({_id, fieldToUpdate, newValue})
+      certificate = await Certificate.update({_id, fieldToUpdate, newValue})
     }
     if (toUpdate.when_date) {
       const fieldToUpdate = "when_date";
       const newValue = toUpdate.when_date;
-      award = await Award.update({_id, fieldToUpdate, newValue})
+      certificate = await Certificate.update({_id, fieldToUpdate, newValue})
     }
     return certificate; 
    } 
@@ -72,7 +67,7 @@ class certificateService {
       }
     return { status: "delete!"}
   }
-
+ 
 }
-
+ 
 export { certificateService };

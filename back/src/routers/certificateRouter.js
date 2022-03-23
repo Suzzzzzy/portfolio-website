@@ -1,7 +1,7 @@
 import is from "@sindresorhus/is";
 import { Router } from "express";
 import { login_required } from "../middlewares/login_required"
-import { certificateService } from "../services/certificate"
+import { certificateService } from "../services/certificateService"
 
 const certificateRouter = Router();
 // 자격증 추가하기(Create)
@@ -54,10 +54,10 @@ certificateRouter.get("/certificates/:id", login_required, async function (req, 
 );
 
   //사용자가 등록한 자격증List 조회
-  certificateRouter.get("/certificatelist/:certificate_id", login_required, async function (req, res, next) {
+  certificateRouter.get("/certificatelist/:_id", login_required, async function (req, res, next) {
     try {
-      const certificate_id = req.params.id;
-      const certificatelist = await certificateService.getCertificate({ certificate_id });
+      const user_id = req.params.id;
+      const certificatelist = await certificateService.getCertificate({ user_id });
 
       if (certificatelist.errorMessage) {
         throw new Error(certificatelist.errorMessage);
@@ -75,7 +75,7 @@ certificateRouter.get("/certificates/:id", login_required, async function (req, 
 certificateRouter.put("/certificates/:id", login_required, async function (req, res, next) {
     try {
       // URI로부터 자격증 사용자 id를 추출함.
-      const certificate_id = req.params.id;
+      const _id = req.params.id;
       // body data 로부터 업데이트할 자격증 정보를 추출함.
       const title = req.body.title ?? null;
       const description = req.body.description ?? null;
@@ -84,7 +84,7 @@ certificateRouter.put("/certificates/:id", login_required, async function (req, 
       const toUpdate = { title, description, when_date };
 
       // 해당 사용자 아이디로 자격증 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
-      const updatedCertificate = await certificateService.setCertificate({ certificate_id, toUpdate });
+      const updatedCertificate = await certificateService.setCertificate({ _id, toUpdate });
 
       if (updatedCertificate.errorMessage) {
         throw new Error(updatedCertificate.errorMessage);
@@ -100,8 +100,8 @@ certificateRouter.put("/certificates/:id", login_required, async function (req, 
 //자격증 삭제하기
 certificateRouter.delete("/certificate/:id", login_required, async function (req, res, next) {
   try {
-    const certificate_id = req.params.id;
-    const deleted = await certificateService.deleteCertificate({ certificate_id });
+    const _id = req.params.id;
+    const deleted = await certificateService.deleteCertificate({ _id });
 
     if (deleted.errorMessage) {
       throw new Error(deleted.errorMessage);
@@ -111,8 +111,8 @@ certificateRouter.delete("/certificate/:id", login_required, async function (req
   } catch (error) {
     next(error);
   }
-}
+} 
 );
 
-
+ 
 export { certificateRouter };
