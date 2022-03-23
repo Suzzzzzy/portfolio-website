@@ -73,7 +73,7 @@ awardRouter.get("/awards/:id", login_required, async function (req, res, next) {
 
 
   //상장 수정하기(Update)
-awardRouter.put("/awards/:id", async function (req, res, next) {
+awardRouter.put("/awards/:id", login_required, async function (req, res, next) {
     try { 
       // URI로부터 상장 사용자 id를 추출함.
       const _id = req.params.id;
