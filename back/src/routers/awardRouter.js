@@ -5,7 +5,7 @@ import { awardService } from "../services/awardService"
 
 const awardRouter = Router();
 // 상장 추가하기(Create)
-awardRouter.post("/award/create", login_required, async function (req, res, next) {
+awardRouter.post("/award/create", async function (req, res, next) {
   try {
     if (is.emptyObject(req.body)) {
       throw new Error(
@@ -73,8 +73,8 @@ awardRouter.get("/awards/:id", login_required, async function (req, res, next) {
 
 
   //상장 수정하기(Update)
-awardRouter.put("/awards/:id", login_required, async function (req, res, next) {
-    try {
+awardRouter.put("/awards/:id", async function (req, res, next) {
+    try { 
       // URI로부터 상장 사용자 id를 추출함.
       const _id = req.params.id;
       // body data 로부터 업데이트할 상장 정보를 추출함.
