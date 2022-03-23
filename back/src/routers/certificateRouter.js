@@ -1,7 +1,7 @@
 import is from "@sindresorhus/is";
 import { Router } from "express";
 import { login_required } from "../middlewares/login_required"
-import { certificateService } from "../services/certificateService"
+import { certificateService } from "../services/certificate"
 
 const certificateRouter = Router();
 // 자격증 추가하기(Create)
