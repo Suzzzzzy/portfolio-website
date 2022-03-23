@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 class certificateService {
   static async addCertificate({ _id, title, description, when_date}) {
     
-    // 자격증 추가하기(CREATE)
+    // 자격증 추가하기(CREATE) 
       // 자격증 중복 확인
     const certificate = await Certificate.findById({_id});
       if (certificate) {
