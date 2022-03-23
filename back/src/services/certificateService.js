@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 class certificateService {
   static async addCertificate({ _id, title, description, when_date}) {
     
-    // 자격증 추가하기(CREATE)
+    // 자격증 추가하기(CREATE) 
       // 자격증 중복 확인
     const certificate = await Certificate.findById({_id});
       if (certificate) {
@@ -43,22 +43,17 @@ class certificateService {
      if (toUpdate.title) {
        const fieldToUpdate = "title";
        const newValue = toUpdate.title;
-       award = await Certificate.update({_id, fieldToUpdate, newValue})
+       certificate = await Certificate.update({_id, fieldToUpdate, newValue})
      }
      if (toUpdate.description) {
       const fieldToUpdate = "description";
       const newValue = toUpdate.description;
-      award = await Certificate.update({_id, fieldToUpdate, newValue})
-    }
-    if (toUpdate.authority) {
-      const fieldToUpdate = "authority";
-      const newValue = toUpdate.authority;
-      award = await Award.update({_id, fieldToUpdate, newValue})
+      certificate = await Certificate.update({_id, fieldToUpdate, newValue})
     }
     if (toUpdate.when_date) {
       const fieldToUpdate = "when_date";
       const newValue = toUpdate.when_date;
-      award = await Award.update({_id, fieldToUpdate, newValue})
+      certificate = await Certificate.update({_id, fieldToUpdate, newValue})
     }
     return certificate; 
    } 
@@ -72,7 +67,7 @@ class certificateService {
       }
     return { status: "delete!"}
   }
-
+ 
 }
-
+ 
 export { certificateService };

@@ -74,7 +74,7 @@ awardRouter.get("/awards/:id", login_required, async function (req, res, next) {
 
   //상장 수정하기(Update)
 awardRouter.put("/awards/:id", login_required, async function (req, res, next) {
-    try {
+    try { 
       // URI로부터 상장 사용자 id를 추출함.
       const _id = req.params.id;
       // body data 로부터 업데이트할 상장 정보를 추출함.

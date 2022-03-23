@@ -1,7 +1,8 @@
+import {Project} from "../db";
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
-import {Project} from "../db/models/Project";
+
 
 class projectService {
   static async addProject({ _id, title, description, from_date, to_date}) {
@@ -53,12 +54,12 @@ class projectService {
     }
     if (toUpdate.from_date) {
       const fieldToUpdate = "from_date";
-      const newValue = toUpdate.description;
+      const newValue = toUpdate.from_date;
       project = await Project.update({ _id, fieldToUpdate, newValue });
     }
     if (toUpdate.to_date) {
       const fieldToUpdate = "to_date";
-      const newValue = toUpdate.description;
+      const newValue = toUpdate.to_date;
       project = await Project.update({ _id, fieldToUpdate, newValue });
     }
 
