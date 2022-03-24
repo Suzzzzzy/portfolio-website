@@ -21,10 +21,10 @@ function Projects({ portfolioOwnerId, isEditable }) {
         <Card>
             <Card.Body>
                 <Card.Title>프로젝트</Card.Title>
-                {projects.map((certificate) => (
+                {projects.map((project) => (
                     <Project
-                        key={certificate.id}
-                        certificate={certificate}
+                        key={project.id}
+                        project={project}
                         setProjects={setProjects}
                         isEditable={isEditable}
                     />
