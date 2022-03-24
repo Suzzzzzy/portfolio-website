@@ -15,23 +15,27 @@ function ProjectEditForm({
         currentProject.description
     );
 
-    const [whenDate, setWhenDate] = useState(
-        new Date(currentProject.when_date)
+    const [fromDate, setFromDate] = useState(
+        new Date(currentProject.from_date)
     );
-
+    const [toDate, setToDate] = useState(
+        new Date(currentProject.to_date)
+    );
     const handleSubmit = async (e) => {
         e.preventDefault();
 
 
         const user_id = currentProject.user_id;
-        const when_date = whenDate.toISOString().split("T")[0];
+        const from_date = fromDate.toISOString().split("T")[0];
+        const to_date = toDate.toISOString().split("T")[0];
 
 
         await Api.put(`projects/${currentProject.id}`, {
             user_id,
             title,
             description,
-            when_date,
+            from_date,
+            to_date,
         });
 
 
@@ -47,7 +51,7 @@ function ProjectEditForm({
             <Form.Group controlId="projectEditTitle">
                 <Form.Control
                     type="text"
-                    placeholder="프로젝트 제목 edit"
+                    placeholder="프로젝트 제목"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
@@ -65,12 +69,12 @@ function ProjectEditForm({
             <Form.Group as={Row} className="mt-3">
                 <Col xs="auto">
                     <DatePicker
-                        selected={whenDate}
-                        onChange={(date) => setWhenDate(date)}
+                        selected={fromDate}
+                        onChange={(date) => setFromDate(date)}
                     />
                     <DatePicker
-                        selected={whenDate}
-                        onChange={(date) => setWhenDate(date)}
+                        selected={toDate}
+                        onChange={(date) => setToDate(date)}
                     />
                 </Col>
             </Form.Group>

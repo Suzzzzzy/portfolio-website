@@ -9,7 +9,9 @@ function ProjectCard({ Project, isEditable, setIsEditing }) {
                     <br />
                     <span className="text-muted">{Project.description}</span>
                     <br />
-                    <span className="text-muted">{Project.when_date}</span>
+                    <span className="text-muted">{Project.from_date}</span>
+                    <br />
+                    <span className="text-muted">{Project.to_date}</span>
                 </Col>
                 {isEditable && (
                     <Col xs lg="1">
