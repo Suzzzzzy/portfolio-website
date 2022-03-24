@@ -17,7 +17,7 @@ static async findById({ _id }) {
 }
 
 // 사용자 상장list 불러오기
-static async findAll({ user_id }) {
+static async findByAll({ user_id }) {
   const awardlist = await AwardModel.find({ user_id });
   return awardlist;
 }

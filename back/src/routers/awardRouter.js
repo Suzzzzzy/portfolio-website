@@ -73,7 +73,7 @@ awardRouter.get("/award/:id", login_required, async function (req, res, next) {
 
 
   //상장 수정하기(Update)
-awardRouter.put("/award/:id", login_required, async function (req, res, next) {
+awardRouter.put("/awards/:id", login_required, async function (req, res, next) {
     try {
       const user_id = req.body.user_id;
       // URI로부터 상장 사용자 id를 추출함.
@@ -83,7 +83,7 @@ awardRouter.put("/award/:id", login_required, async function (req, res, next) {
       const description = req.body.description ?? null;
       const when_date = req.body.when_date ?? null;
 
-      const toUpdate = { title, description, authority, when_date };
+      const toUpdate = { user_id, _id, title, description, when_date };
 
       // 해당 사용자 아이디로 상장 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
       const updatedAward = await awardService.setAward({ _id, toUpdate });
@@ -100,7 +100,7 @@ awardRouter.put("/award/:id", login_required, async function (req, res, next) {
 );
 
 // 상장 삭제하기
-awardRouter.delete("/award/:id", login_required, async function (req, res, next) {
+awardRouter.delete("/awards/:id", login_required, async function (req, res, next) {
   try {
     const _id = req.params.id;
     const deleted = await awardService.deleteAward({ _id });

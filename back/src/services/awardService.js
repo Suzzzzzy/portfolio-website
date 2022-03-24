@@ -33,7 +33,7 @@ class awardService {
 
    // 사용자 상장list 불러오기
    static async getAwardList({ user_id }) {
-    const awardlist = await Award.findAll({ user_id });
+    const awardlist = await Award.findByAll({ user_id });
     if (awardlist.length == 0) {
       const errorMessage =
           "해당 유저의 수상내용이 존재하지 않습니다.";
