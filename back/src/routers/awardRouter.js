@@ -38,7 +38,7 @@ awardRouter.post("/award/create", async function (req, res, next) {
 });
 
   // 사용자의 상장 한개 조회
-awardRouter.get("/awards/:id", login_required, async function (req, res, next) {
+awardRouter.get("/award/:id", login_required, async function (req, res, next) {
   try {
     const _id = req.params.id;
     const award = await awardService.getAward({ _id });
@@ -57,8 +57,8 @@ awardRouter.get("/awards/:id", login_required, async function (req, res, next) {
  // 사용자가 등록한 상장list 조회
  awardRouter.get("/awardlist/:user_id", login_required, async function (req, res, next) {
   try {
-    const user_id = req.params.id;
-    const awardlist = await awardService.getAward({ user_id });
+    const user_id = req.params.user_id;
+    const awardlist = await awardService.getAwardList({ user_id });
 
     if (awardlist.errorMessage) {
       throw new Error(awardlist.errorMessage);
@@ -73,7 +73,7 @@ awardRouter.get("/awards/:id", login_required, async function (req, res, next) {
 
 
   //상장 수정하기(Update)
-awardRouter.put("/awards/:id", login_required, async function (req, res, next) {
+awardRouter.put("/award/:id", login_required, async function (req, res, next) {
     try {
       const user_id = req.body.user_id;
       // URI로부터 상장 사용자 id를 추출함.
