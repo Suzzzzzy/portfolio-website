@@ -16,7 +16,6 @@ function Projects({ portfolioOwnerId, isEditable }) {
             setProjects(res.data)
         );
     }, [portfolioOwnerId]);
-
     return (
         <Card>
             <Card.Body>
