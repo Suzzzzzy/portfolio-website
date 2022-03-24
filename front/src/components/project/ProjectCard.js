@@ -1,17 +1,38 @@
+import React from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
+import * as Api from '../../api';
 
-function ProjectCard({ Project, isEditable, setIsEditing }) {
+
+
+function ProjectCard({ project, isEditable, setIsEditing, setProjects }) {
+    const handleDelete = async (e) => {
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const user_id = project.user_id;
+        try {
+            if (window.confirm("삭제 하시겠습니까?")) {
+                await Api.delete(`projects/${project.id}`);
+                const res = await Api.get("projectlist", user_id);
+                setProjects(res.data);
+            }
+        } catch (err) {
+            alert("삭제 오류", err);
+        }
+
+    };
     return (
         <Card.Text>
             <Row className="align-items-center">
                 <Col>
-                    {Project.title}
+                    {project.title}
                     <br />
-                    <span className="text-muted">{Project.description}</span>
+                    <span className="text-muted">{project.description}</span>
                     <br />
-                    <span className="text-muted">{Project.from_date}</span>
+                    <span className="text-muted">{project.from_date}</span>
                     <br />
-                    <span className="text-muted">{Project.to_date}</span>
+                    <span className="text-muted">{project.to_date}</span>
                 </Col>
                 {isEditable && (
                     <Col xs lg="1">
@@ -22,6 +43,14 @@ function ProjectCard({ Project, isEditable, setIsEditing }) {
                             className="mr-3"
                         >
                             편집
+                        </Button>
+                        <Button
+                            variant="outline-danger"
+                            size="sm"
+                            className="mr-3"
+                            onClick={handleDelete}
+                        >
+                            삭제
                         </Button>
                     </Col>
                 )}
