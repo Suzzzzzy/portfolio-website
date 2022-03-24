@@ -1,7 +1,7 @@
 import is from "@sindresorhus/is";
 import { Router } from "express";
-import { login_required } from "../middlewares/login_required"
-import { projectService } from "../services/projectService"
+import { login_required } from "../middlewares/login_required";
+import { projectService } from "../services/projectService";
 
 const projectRouter = Router();
 // 프로젝트 추가하기(Create)
@@ -14,9 +14,9 @@ projectRouter.post("/project/create", async function (req, res, next) {
     }
     // req (request) 에서 데이터 가져오기
     const user_id = req.body.user_id;
-    const title= req.body.title;
+    const title = req.body.title;
     const description = req.body.description;
-    const when_date = req.body.when_date
+    const when_date = req.body.when_date;
 
     // 위 데이터를 Project db에 추가하기
     const newProject = await projectService.addProject({
@@ -28,7 +28,6 @@ projectRouter.post("/project/create", async function (req, res, next) {
 
     if (newProject.errorMessage) {
       throw new Error(newProject.errorMessage);
-      
     }
 
     res.status(201).json(newProject);
@@ -37,43 +36,47 @@ projectRouter.post("/project/create", async function (req, res, next) {
   }
 });
 
-  // 사용자의 프로젝트 한개 조회
-projectRouter.get("/project/:id", login_required, async function (req, res, next) {
-  try {
-    const _id = req.params.id;
-    const project = await projectService.getProject({ _id });
+// 사용자의 프로젝트 한개 조회
+projectRouter.get(
+  "/project/:id",
+  login_required,
+  async function (req, res, next) {
+    try {
+      const _id = req.params.id;
+      const project = await projectService.getProject({ _id });
 
-    if (project.errorMessage) {
-      throw new Error(project.errorMessage);
+      if (project.errorMessage) {
+        throw new Error(project.errorMessage);
+      }
+
+      res.status(200).json(project);
+    } catch (error) {
+      next(error);
     }
-
-    res.status(200).json(project);
-  } catch (error) {
-    next(error);
   }
-}
 );
 
- // 사용자가 등록한 프로젝트list 조회
- projectRouter.get("/projectlist/:user_id", async function (req, res, next) {
+// 사용자가 등록한 프로젝트list 조회
+projectRouter.get("/projectlist/:user_id", async function (req, res, next) {
   try {
     const user_id = req.params.user_id;
-    const projectlist = await projectService.getProjectList({ user_id });
+    const projectList = await projectService.getProjectList({ user_id });
 
-    if (projectlist.errorMessage) {
+    if (projectList.errorMessage) {
       throw new Error(projectlist.errorMessage);
     }
 
-    res.status(200).json(projectlist);
+    res.status(200).json(projectList);
   } catch (error) {
     next(error);
   }
-}
-);
+});
 
-
-  //프로젝트 수정하기(Update)
-projectRouter.put("/projects/:id", login_required, async function (req, res, next) {
+//프로젝트 수정하기(Update)
+projectRouter.put(
+  "/projects/:id",
+  login_required,
+  async function (req, res, next) {
     try {
       const user_id = req.body.user_id;
       // URI로부터 프로젝트 사용자 id를 추출함.
@@ -100,20 +103,23 @@ projectRouter.put("/projects/:id", login_required, async function (req, res, nex
 );
 
 // 프로젝트 삭제하기
-projectRouter.delete("/projects/:id", login_required, async function (req, res, next) {
-  try {
-    const _id = req.params.id;
-    const deleted = await projectService.deleteProject({ _id });
+projectRouter.delete(
+  "/projects/:id",
+  login_required,
+  async function (req, res, next) {
+    try {
+      const _id = req.params.id;
+      const deleted = await projectService.deleteProject({ _id });
 
-    if (deleted.errorMessage) {
-      throw new Error(deleted.errorMessage);
+      if (deleted.errorMessage) {
+        throw new Error(deleted.errorMessage);
+      }
+
+      res.status(200).json(deleted, "삭제가 완료되었습니다.");
+    } catch (error) {
+      next(error);
     }
-
-    res.status(200).json(deleted, "삭제가 완료되었습니다.");
-  } catch (error) {
-    next(error);
   }
-}
 );
 
 export { projectRouter };
