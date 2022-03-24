@@ -10,7 +10,7 @@ class projectService {
       // 프로젝트 중복 확인
     const project = await Project.findById({_id});
       if (project) {
-        const errorMessage = "이미 존재하는 수상정보입니다."
+        const errorMessage = "이미 존재하는 프로젝트입니다."
         return { errorMessage }
       }
     const newProject = ({ id:_id, user_id, title, description, when_date })
@@ -25,7 +25,7 @@ class projectService {
      const project = await Project.findById({_id});
      if (project.length == 0) {
       const errorMessage =
-          "해당 수상내용이 존재하지 않습니다.";
+          "해당 프로젝트가 존재하지 않습니다.";
       return { errorMessage };
   }
      return project;
@@ -36,7 +36,7 @@ class projectService {
     const projectlist = await Project.findByAll({ user_id });
     if (projectlist.length == 0) {
       const errorMessage =
-          "해당 유저의 수상내용이 존재하지 않습니다.";
+          "해당 유저의 프로젝트가 존재하지 않습니다.";
       return { errorMessage };
   }
     return projectlist;
@@ -68,7 +68,7 @@ class projectService {
    static async deleteProject({ _id }) {
     const deleted = await Project.deleteById({ _id });
       if (!deleted) {
-        const errorMessage = "수상내역이 존재하지 않습니다.";
+        const errorMessage = "프로젝트가 존재하지 않습니다.";
         return { errorMessage };
       }
     return { status: "delete!"}
