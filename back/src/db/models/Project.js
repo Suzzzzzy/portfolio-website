@@ -3,26 +3,26 @@
 import { ProjectModel } from "../schemas/project";
 import mongoose from "mongoose"
 
-// 상장 추가
+// 프로젝트 추가
 class Project {
   static async create({ newProject }) {
     const createdNewProject = await ProjectModel.create(newProject);
     return createdNewProject;
   }
 
-// 선택한 상장 불러오기
+// 선택한 프로젝트 불러오기
 static async findById({ _id }) {
   const project = await ProjectModel.findOne({ id: _id });
   return project;
 }
 
-// 사용자 상장list 불러오기
+// 사용자 프로젝트list 불러오기
 static async findByAll({ user_id }) {
   const projectlist = await ProjectModel.find({ user_id });
   return projectlist;
 }
 
-// 사용자 상장 수정하기
+// 사용자 프로젝트 수정하기
 static async update({ _id, fieldToUpdate, newValue }) {
   const filter = { id: _id }; 
   const update = { [fieldToUpdate]: newValue };

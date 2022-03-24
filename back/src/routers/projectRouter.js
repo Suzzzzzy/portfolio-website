@@ -37,7 +37,7 @@ projectRouter.post("/project/create", async function (req, res, next) {
   }
 });
 
-  // 사용자의 상장 한개 조회
+  // 사용자의 프로젝트 한개 조회
 projectRouter.get("/project/:id", login_required, async function (req, res, next) {
   try {
     const _id = req.params.id;
@@ -85,7 +85,7 @@ projectRouter.put("/projects/:id", login_required, async function (req, res, nex
 
       const toUpdate = { user_id, _id, title, description, when_date };
 
-      // 해당 사용자 아이디로 상장 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
+      // 해당 사용자 아이디로 프로젝트 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
       const updatedProject = await projectService.setProject({ _id, toUpdate });
 
       if (updatedProject.errorMessage) {
@@ -99,7 +99,7 @@ projectRouter.put("/projects/:id", login_required, async function (req, res, nex
   }
 );
 
-// 상장 삭제하기
+// 프로젝트 삭제하기
 projectRouter.delete("/projects/:id", login_required, async function (req, res, next) {
   try {
     const _id = req.params.id;
