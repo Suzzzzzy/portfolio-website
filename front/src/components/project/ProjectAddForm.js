@@ -13,21 +13,26 @@ function ProjectAddFrom({
 
     const [description, setDescription] = useState("");
 
-    const [whenDate, setWhenDate] = useState(new Date());
+    const [fromDate, setFromDate] = useState(new Date());
+
+    const [toDate, setToDate] = useState(new Date());
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
 
         const user_id = portfolioOwnerId;
-        const when_date = whenDate.toISOString().split("T")[0];
+        const from_date = fromDate.toISOString().split("T")[0];
+        const to_date = toDate.toISOString().split("T")[0];
 
 
         await Api.post("project/create", {
             user_id,
             title,
             description,
-            when_date,
+            from_date,
+            to_date,
         });
 
 
@@ -43,7 +48,7 @@ function ProjectAddFrom({
             <Form.Group controlId="proejctAddTitle">
                 <Form.Control
                     type="text"
-                    placeholder="프로젝트 제목 add"
+                    placeholder="프로젝트 제목"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
@@ -62,14 +67,14 @@ function ProjectAddFrom({
                 <Row xs="auto">
                     <Col>
                         <DatePicker
-                            selected={whenDate}
-                            onChange={(date) => setWhenDate(date)}
+                            selected={fromDate}
+                            onChange={(date) => setFromDate(date)}
                         />
                     </Col>
                     <Col>
                         <DatePicker
-                            selected={whenDate}
-                            onChange={(date) => setWhenDate(date)}
+                            selected={toDate}
+                            onChange={(date) => setToDate(date)}
                         />
                     </Col>
                 </Row>

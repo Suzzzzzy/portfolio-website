@@ -3,61 +3,57 @@ import { Button, Form, Col, Row } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import * as Api from "../../api";
 
-function ProjectEditForm({
-    currentProject,
-    setProjects,
+function EducationEditForm({
+    currentEducation,
+    setEducations,
     setIsEditing,
 }) {
 
-    const [title, setTitle] = useState(currentProject.title);
+    const [title, setTitle] = useState(currentEducation.title);
 
     const [description, setDescription] = useState(
-        currentProject.description
+        currentEducation.description
     );
 
-    const [fromDate, setFromDate] = useState(
-        new Date(currentProject.from_date)
+    const [whenDate, setWhenDate] = useState(
+        new Date(currentEducation.when_date)
     );
-    const [toDate, setToDate] = useState(
-        new Date(currentProject.to_date)
-    );
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
 
-        const user_id = currentProject.user_id;
-        const from_date = fromDate.toISOString().split("T")[0];
-        const to_date = toDate.toISOString().split("T")[0];
+        const user_id = currentEducation.user_id;
+        const when_date = whenDate.toISOString().split("T")[0];
 
 
-        await Api.put(`projects/${currentProject.id}`, {
+        await Api.put(`educations/${currentEducation.id}`, {
             user_id,
             title,
             description,
-            from_date,
-            to_date,
+            when_date,
         });
 
 
-        const res = await Api.get("projectlist", user_id);
+        const res = await Api.get("educationlist", user_id);
 
-        setProjects(res.data);
+        setEducations(res.data);
 
         setIsEditing(false);
     };
 
     return (
         <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="projectEditTitle">
+            <Form.Group controlId="educationEditTitle">
                 <Form.Control
                     type="text"
-                    placeholder="프로젝트 제목"
+                    placeholder="학력 제목"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
             </Form.Group>
 
-            <Form.Group controlId="projectEditDescription" className="mt-3">
+            <Form.Group controlId="educationEditDescription" className="mt-3">
                 <Form.Control
                     type="text"
                     placeholder="상세내역"
@@ -69,12 +65,8 @@ function ProjectEditForm({
             <Form.Group as={Row} className="mt-3">
                 <Col xs="auto">
                     <DatePicker
-                        selected={fromDate}
-                        onChange={(date) => setFromDate(date)}
-                    />
-                    <DatePicker
-                        selected={toDate}
-                        onChange={(date) => setToDate(date)}
+                        selected={whenDate}
+                        onChange={(date) => setWhenDate(date)}
                     />
                 </Col>
             </Form.Group>
@@ -93,4 +85,4 @@ function ProjectEditForm({
     );
 }
 
-export default ProjectEditForm;
+export default EducationEditForm;

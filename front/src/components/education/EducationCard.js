@@ -1,17 +1,15 @@
 import { Card, Button, Row, Col } from "react-bootstrap";
 
-function ProjectCard({ Project, isEditable, setIsEditing }) {
+function EducationCard({ education, isEditable, setIsEditing }) {
     return (
         <Card.Text>
             <Row className="align-items-center">
                 <Col>
-                    {Project.title}
+                    {education.title}
                     <br />
-                    <span className="text-muted">{Project.description}</span>
+                    <span className="text-muted">{education.description}</span>
                     <br />
-                    <span className="text-muted">{Project.from_date}</span>
-                    <br />
-                    <span className="text-muted">{Project.to_date}</span>
+                    <span className="text-muted">{education.when_date}</span>
                 </Col>
                 {isEditable && (
                     <Col xs lg="1">
@@ -30,4 +28,4 @@ function ProjectCard({ Project, isEditable, setIsEditing }) {
     );
 }
 
-export default ProjectCard;
+export default EducationCard;
