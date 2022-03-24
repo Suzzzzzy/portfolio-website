@@ -69,11 +69,13 @@ class certificateService {
    // 자격증 삭제하기
    static async deleteCertificate({ certificateId }) {
     const deleted = await Certificate.deleteById({ certificateId });
-      if (!deleted) {
-        const errorMessage = "수상내역이 존재하지 않습니다.";
-        return { errorMessage };
-      }
-    return { status: "delete!"}
+
+      // if (!deleted) {
+      //   const errorMessage = "수상내역이 존재하지 않습니다.";
+      //   return { errorMessage };
+      // }
+
+    return deleted;
   }
  
 }

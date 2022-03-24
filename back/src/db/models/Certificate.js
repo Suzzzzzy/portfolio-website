@@ -39,10 +39,9 @@ class Certificate {
 
 
 //삭제하기
-static async deleteByid ({ certificateId }) {
-    const deleted = await CertificateModel.deleteOne({ id: certificateId, });
-    const isDeleted = deleted.deletedCount === 1;
-    return isDeleted;
+static async deleteById ({ certificateId }) {
+    const deleted = await CertificateModel.findOneAndDelete({ id: certificateId, });
+    return deleted;
 }
 
 }
