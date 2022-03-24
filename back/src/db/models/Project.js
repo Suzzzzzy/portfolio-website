@@ -39,7 +39,7 @@ class Project {
 
   // 삭제하기
   static async deleteByid({ _id }) {
-    const deleted = await ProjectModel.deleteOne({ _id });
+    const deleted = await ProjectModel.deleteOne({ id: _id });
     return deleted;
   }
 }
