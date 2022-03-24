@@ -1,19 +1,16 @@
-import { Card, Row, Button, Col } from 'react-bootstrap';
+import { Card, Button, Row, Col } from 'react-bootstrap';
 
-function AwardCard({ award, setIsEditing, isEditable }) {
-  const { title, description, authority, when_date } = award;
+function AwardCard({ award, isEditable, setIsEditing }) {
 
   return (
     <Card.Text>
       <Row className="align-items-center">
         <Col>
-          {title}
+          {award.title}
           <br />
-          <span className="text-muted">{description}</span>
+          <span className="text-muted">{award.description}</span>
           <br />
-          <span className="text-muted">{authority}</span>
-          <br />
-          <span className="text-muted">{when_date}</span>
+          <span className="text-muted">{award.when_date}</span>
         </Col>
         {isEditable && (
         <Col xs lg="1">

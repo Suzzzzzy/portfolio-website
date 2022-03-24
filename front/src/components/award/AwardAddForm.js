@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Button, Form, Col, Row } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import * as Api from '../../api';
 
-function AwardAddForm({ portfolioOwnerId, setAwards, setIsAdding }) {
+function AwardAddForm({
+	portfolioOwnerId,
+	setAwards,
+	setIsAdding,
+}) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [whenDate, setWhenDate] = useState(new Date());
