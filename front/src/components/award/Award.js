@@ -3,6 +3,7 @@ import AwardCard from './AwardCard';
 import AwardEditForm from './AwardEditForm';
 
 function Award({ award, setAwards, isEditable }) {
+	
   const [ isEditing, setIsEditing ] = useState(false);
   return (
     <>
@@ -17,6 +18,7 @@ function Award({ award, setAwards, isEditable }) {
           award={award}
           isEditable={isEditable}
           setIsEditing={setIsEditing}
+					setAwards={setAwards}
           />
       )}
     </>

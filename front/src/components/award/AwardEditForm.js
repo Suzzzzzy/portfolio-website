@@ -10,14 +10,22 @@ function AwardEditForm({
 }) {
 
   const [title, setTitle] = useState(currentAward.title);
-  const [description, setDescription] = useState(currentAward.description);
-  const [whenDate, setWhenDate] = useState(new Date(currentAward.when_date));
+
+  const [description, setDescription] = useState(
+		currentAward.description
+	);
+
+  const [whenDate, setWhenDate] = useState(
+		new Date(currentAward.when_date)
+	);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+
     const user_id = currentAward.user_id;
     const when_date = whenDate.toISOString().split("T")[0];
+
 
     await Api.put(`awards/${currentAward.id}`, {
       user_id,
@@ -26,6 +34,7 @@ function AwardEditForm({
       when_date,
     });
     
+		
     const res = await Api.get("awardlist", user_id);
     
     setAwards(res.data);

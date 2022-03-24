@@ -34,16 +34,12 @@ class awardService {
    // 사용자 상장list 불러오기
    static async getAwardList({ user_id }) {
     const awardlist = await Award.findByAll({ user_id });
-    if (awardlist.length == 0) {
-      const errorMessage =
-          "해당 유저의 수상내용이 존재하지 않습니다.";
-      return { errorMessage };
-  }
+
     return awardlist;
   }
 
    // 상장 수정하기
-   static async setAward({_id, toUpdate}) {
+   static async setAward({_id, toUpdate, user_id}) {
      let award = await Award.findById(_id);
 
      if (toUpdate.title) {
@@ -65,13 +61,13 @@ class awardService {
    } 
 
    // 상장 삭제하기
-   static async deleteAward({ _id }) {
-    const deleted = await Award.deleteById({ _id });
-      if (!deleted) {
-        const errorMessage = "수상내역이 존재하지 않습니다.";
-        return { errorMessage };
-      }
-    return { status: "delete!"}
+   static async deleteAward({ _id}) {
+    const deleted = await Award.deleteById({ _id});
+      // if (!deleteAward) {
+      //   const errorMessage = "수상내역이 존재하지 않습니다.";
+      //   return { errorMessage };
+      // }
+    return deleted;
   }
 
 
