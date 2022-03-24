@@ -6,8 +6,8 @@ import jwt from "jsonwebtoken";
 class projectService {
   static async addProject({ user_id, title, description, when_date}) {
     const _id = uuidv4();
-    // 상장 추가하기(CREATE)
-      // 상장 중복 확인
+    // 프로젝트 추가하기(CREATE)
+      // 프로젝트 중복 확인
     const project = await Project.findById({_id});
       if (project) {
         const errorMessage = "이미 존재하는 수상정보입니다."
@@ -20,7 +20,7 @@ class projectService {
     return createdNewProject;
   }
 
-   // 상장 불러오기
+   // 프로젝트 불러오기
    static async getProject({_id}) {
      const project = await Project.findById({_id});
      if (project.length == 0) {
@@ -31,7 +31,7 @@ class projectService {
      return project;
    }
 
-   // 사용자 상장list 불러오기
+   // 사용자 프로젝트list 불러오기
    static async getProjectList({ user_id }) {
     const projectlist = await Project.findByAll({ user_id });
     if (projectlist.length == 0) {
@@ -42,7 +42,7 @@ class projectService {
     return projectlist;
   }
 
-   // 상장 수정하기
+   // 프로젝트 수정하기
    static async setProject({_id, toUpdate}) {
      let project = await Project.findById(_id);
 
@@ -64,7 +64,7 @@ class projectService {
     return project; 
    } 
 
-   // 상장 삭제하기
+   // 프로젝트 삭제하기
    static async deleteProject({ _id }) {
     const deleted = await Project.deleteById({ _id });
       if (!deleted) {

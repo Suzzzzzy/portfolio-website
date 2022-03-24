@@ -4,7 +4,7 @@ import { login_required } from "../middlewares/login_required"
 import { projectService } from "../services/projectService"
 
 const projectRouter = Router();
-// 상장 추가하기(Create)
+// 프로젝트 추가하기(Create)
 projectRouter.post("/project/create", async function (req, res, next) {
   try {
     if (is.emptyObject(req.body)) {
