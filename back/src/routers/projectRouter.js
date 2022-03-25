@@ -110,13 +110,8 @@ projectRouter.delete(
     try {
       const _id = req.params.id;
       const deleted = await projectService.deleteProject({ _id });
-
-      if (deleted.errorMessage) {
-        throw new Error(deleted.errorMessage);
-      }
-
-      res.status(200).json(deleted, "삭제가 완료되었습니다.");
-    } catch (error) {
+      res.status(200).json(deleted);
+        } catch (error) {
       next(error);
     }
   }

@@ -38,8 +38,8 @@ class Project {
   }
 
   // 삭제하기
-  static async deleteByid({ _id }) {
-    const deleted = await ProjectModel.deleteOne({ id: _id });
+  static async deleteById({ _id }) {
+    const deleted = await ProjectModel.findOneAndDelete({ id: _id });
     return deleted;
   }
 }
