@@ -8,15 +8,20 @@ function AwardAddForm({
 	setAwards,
 	setIsAdding,
 }) {
+
   const [title, setTitle] = useState("");
+
   const [description, setDescription] = useState("");
+
   const [whenDate, setWhenDate] = useState(new Date());
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
     const user_id = portfolioOwnerId;
     const when_date = whenDate.toISOString().split("T")[0];
+
 
     await Api.post("award/create", {
       user_id,
@@ -25,6 +30,7 @@ function AwardAddForm({
       when_date,
     });
 
+		
     const res = await Api.get("awardlist", user_id);
 
     setAwards(res.data);

@@ -105,11 +105,11 @@ awardRouter.delete("/awards/:id", login_required, async function (req, res, next
     const _id = req.params.id;
     const deleted = await awardService.deleteAward({ _id });
 
-    if (deleted.errorMessage) {
-      throw new Error(deleted.errorMessage);
-    }
+    // if (deleted.errorMessage) {
+    //   throw new Error(deleted.errorMessage);
+    // }
 
-    res.status(200).json(deleted, "삭제가 완료되었습니다.");
+    res.status(200).json(deleted);
   } catch (error) {
     next(error);
   }
