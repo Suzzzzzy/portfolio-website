@@ -12,7 +12,7 @@ certificateRouter.post("/certificate/create", async function (req, res, next) {
       throw new Error(
         "headers의 Content-Type을 application/json으로 설정해주세요"
       );
-    } 
+    }
     // req (request) 에서 데이터 가져오기
     const user_id = req.body.user_id;
     const title= req.body.title;
@@ -103,14 +103,15 @@ certificateRouter.put("/certificates/:id", async function (req, res, next) {
 //자격증 삭제하기
 certificateRouter.delete("/certificates/:id", async function (req, res, next) {
   try {
+
     const certificateId = req.params.id;
     const deleted = await certificateService.deleteCertificate({ certificateId });
 
-    if (deleted.errorMessage) {
-      throw new Error(deleted.errorMessage);
-    }
+    // if (deleted.errorMessage) {
+    //   throw new Error(deleted.errorMessage);
+    // }
 
-    res.status(200).json(deleted, "삭제가 완료되었습니다.");
+    res.status(200).json(deleted);
   } catch (error) {
     next(error);
   }

@@ -15,7 +15,6 @@ class Certificate {
     const certificate = await CertificateModel.findOne({ id: certificateId });
     return certificate;
   }
- 
   //사용자 자격증 List 불러오기
   static async findByAll({ user_id }) {
       const certificates = await CertificateModel.find({ user_id });
@@ -39,12 +38,11 @@ class Certificate {
 
 
 //삭제하기
-static async deleteByid ({ certificateId }) {
-    const deleted = await CertificateModel.deleteOne({ id: certificateId, });
-    const isDeleted = deleted.deletedCount === 1;
-    return isDeleted;
+static async deleteById ({ certificateId }) {
+    const deleted = await CertificateModel.findOneAndDelete({ id: certificateId, });
+    return deleted;
 }
 
 }
- 
+
 export { Certificate };

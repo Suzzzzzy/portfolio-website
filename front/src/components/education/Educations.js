@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import * as Api from "../../api";
-import Project from "./Project";
-import ProjectAddForm from "./ProjectAddForm";
+import Education from "./Education";
+import EducationAddForm from "./EducationAddForm";
 
-function Projects({ portfolioOwnerId, isEditable }) {
+function Educations({ portfolioOwnerId, isEditable }) {
 
-    const [projects, setProjects] = useState([]);
+    const [educations, setEducations] = useState([]);
 
     const [isAdding, setIsAdding] = useState(false);
 
     useEffect(() => {
 
-        Api.get("projectlist", portfolioOwnerId).then((res) =>
-            setProjects(res.data)
+        Api.get("educationlist", portfolioOwnerId).then((res) =>
+            setEducations(res.data)
         );
     }, [portfolioOwnerId]);
 
     return (
         <Card>
             <Card.Body>
-                <Card.Title>프로젝트</Card.Title>
-                {projects.map((project) => (
-                    <Project
-                        key={project.id}
-                        project={project}
-                        setProjects={setProjects}
+                <Card.Title>학력</Card.Title>
+                {educations.map((education) => (
+                    <Education
+                        key={education.id}
+                        education={education}
+                        setEducations={setEducations}
                         isEditable={isEditable}
                     />
                 ))}
@@ -37,9 +37,9 @@ function Projects({ portfolioOwnerId, isEditable }) {
                     </Row>
                 )}
                 {isAdding && (
-                    <ProjectAddForm
+                    <EducationAddForm
                         portfolioOwnerId={portfolioOwnerId}
-                        setProjects={setProjects}
+                        setEducations={setEducations}
                         setIsAdding={setIsAdding}
                     />
                 )}
@@ -48,4 +48,4 @@ function Projects({ portfolioOwnerId, isEditable }) {
     );
 }
 
-export default Projects;
+export default Educations;
