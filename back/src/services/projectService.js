@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
 
 class projectService {
-  static async addProject({ user_id, title, description, when_date }) {
+  static async addProject({ user_id, title, description, from_date, to_date }) {
     const _id = uuidv4();
     // 프로젝트 추가하기(CREATE)
     // 프로젝트 중복 확인
@@ -13,7 +13,7 @@ class projectService {
       const errorMessage = "이미 존재하는 프로젝트입니다.";
       return { errorMessage };
     }
-    const newProject = { id: _id, user_id, title, description, when_date };
+    const newProject = { id: _id, user_id, title, description, from_date, to_date };
     const createdNewProject = await Project.create({ newProject });
     createdNewProject.errorMessage = null; // 문제 없이 db 저장 완료되었으므로 에러가 없음.
 
@@ -50,9 +50,14 @@ class projectService {
       const newValue = toUpdate.description;
       project = await Project.update({ _id, fieldToUpdate, newValue });
     }
-    if (toUpdate.when_date) {
-      const fieldToUpdate = "when_date";
-      const newValue = toUpdate.when_date;
+    if (toUpdate.from_date) {
+      const fieldToUpdate = "from_date";
+      const newValue = toUpdate.from_date;
+      project = await Project.update({ _id, fieldToUpdate, newValue });
+    }
+    if (toUpdate.to_date) {
+      const fieldToUpdate = "to_date";
+      const newValue = toUpdate.to_date;
       project = await Project.update({ _id, fieldToUpdate, newValue });
     }
     return project;

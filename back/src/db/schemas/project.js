@@ -19,8 +19,13 @@ const ProjectSchema = new Schema(
       required: false,
       default: "설명이 아직 없습니다. 추가해 주세요.",
     },
-    when_date: {
+    from_date: {
       type: String ,
+      required: false,
+      default: "0000.00.00"
+    },
+    to_date: {
+      type: String,
       required: false,
       default: "0000.00.00"
     },

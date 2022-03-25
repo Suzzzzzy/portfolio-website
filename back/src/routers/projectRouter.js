@@ -16,14 +16,16 @@ projectRouter.post("/project/create", async function (req, res, next) {
     const user_id = req.body.user_id;
     const title = req.body.title;
     const description = req.body.description;
-    const when_date = req.body.when_date;
+    const from_date = req.body.from_date;
+    const to_date = req.body.to_date;
 
     // 위 데이터를 Project db에 추가하기
     const newProject = await projectService.addProject({
       user_id,
       title,
       description,
-      when_date,
+      from_date,
+      to_date,
     });
 
     if (newProject.errorMessage) {
@@ -84,9 +86,10 @@ projectRouter.put(
       // body data 로부터 업데이트할 상장 정보를 추출함.
       const title = req.body.title ?? null;
       const description = req.body.description ?? null;
-      const when_date = req.body.when_date ?? null;
+      const from_date = req.body.from_date ?? null;
+      const to_date = req.body.to_date ?? null;
 
-      const toUpdate = { user_id, _id, title, description, when_date };
+      const toUpdate = { user_id, _id, title, description, from_date, to_date};
 
       // 해당 사용자 아이디로 프로젝트 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
       const updatedProject = await projectService.setProject({ _id, toUpdate });
