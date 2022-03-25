@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Row, Button, Col } from 'react-bootstrap';
+import { Card, Button, Row, Col } from 'react-bootstrap';
 import AwardAddForm from './AwardAddForm';
 import Award from './Award';
 import * as Api from '../../api';
@@ -7,17 +7,11 @@ import * as Api from '../../api';
 function Awards({ portfolioOwnerId, isEditable }) {
 
   const [awards, setAwards] = useState([]);
+	
   const [isAdding, setIsAdding] = useState(false);
-  const awardList = awards.map((award) => (
-    <Award
-      key={award.id}
-      award={award}
-      setAwards={setAwards}
-      isEditable={isEditable}
-      />
-      ));
 
   useEffect(() => {
+
     Api.get(`awardlist`, portfolioOwnerId).then((res) =>
       setAwards(res.data)
     );
@@ -27,7 +21,14 @@ function Awards({ portfolioOwnerId, isEditable }) {
     <Card>
       <Card.Body>
         <Card.Title>수상내역</Card.Title>
-        {awardList}
+        {awards.map((award) => (
+    			<Award
+						key={award.id}
+						award={award}
+						setAwards={setAwards}
+						isEditable={isEditable}
+      		/>
+      	))}
         {isEditable && (
           <Row className="mt-3 text-center mb-4">
             <Col sm={{ span: 20 }}>

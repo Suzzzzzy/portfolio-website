@@ -1,18 +1,27 @@
 import React, { useState } from 'react';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Button, Form, Col, Row } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import * as Api from '../../api';
 
-function AwardAddForm({ portfolioOwnerId, setAwards, setIsAdding }) {
+function AwardAddForm({
+	portfolioOwnerId,
+	setAwards,
+	setIsAdding,
+}) {
+
   const [title, setTitle] = useState("");
+
   const [description, setDescription] = useState("");
+
   const [whenDate, setWhenDate] = useState(new Date());
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
     const user_id = portfolioOwnerId;
     const when_date = whenDate.toISOString().split("T")[0];
+
 
     await Api.post("award/create", {
       user_id,
@@ -21,6 +30,7 @@ function AwardAddForm({ portfolioOwnerId, setAwards, setIsAdding }) {
       when_date,
     });
 
+		
     const res = await Api.get("awardlist", user_id);
 
     setAwards(res.data);

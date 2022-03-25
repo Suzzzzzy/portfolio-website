@@ -12,7 +12,7 @@ class Award {
 
 // 선택한 상장 불러오기
 static async findById({ _id }) {
-  const award = await AwardModel.findOne({ _id: _id });
+  const award = await AwardModel.findOne({ id: _id });
   return award;
 }
 
@@ -24,7 +24,7 @@ static async findByAll({ user_id }) {
 
 // 사용자 상장 수정하기
 static async update({ _id, fieldToUpdate, newValue }) {
-  const filter = { _id: _id }; 
+  const filter = { id: _id }; 
   const update = { [fieldToUpdate]: newValue };
   const option = { returnOriginal: false };
     
@@ -38,8 +38,8 @@ static async update({ _id, fieldToUpdate, newValue }) {
 }
 
 // 삭제하기
-static async deleteByid({ _id }) {
-  const deleted = await AwardModel.deleteOne({ _id });
+static async deleteById({ _id }) {
+  const deleted = await AwardModel.findOneAndDelete({ id:_id });
   return deleted;
 }
 

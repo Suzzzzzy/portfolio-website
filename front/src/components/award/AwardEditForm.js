@@ -1,29 +1,40 @@
 import React, { useState } from 'react';
-import { Button, Form, Card, Col, Row } from 'react-bootstrap';
+import { Button, Form, Col, Row } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import * as Api from '../../api';
 
-function AwardEditForm({ currentAward, setIsEditing, setAwards }) {
+function AwardEditForm({
+	currentAward,
+	setAwards,
+	setIsEditing,
+}) {
 
   const [title, setTitle] = useState(currentAward.title);
-  const [description, setDescription] = useState(currentAward.description);
-  const [authority, setAuthority] = useState(currentAward.authority);
-  const [whenDate, setWhenDate] = useState(new Date(currentAward.when_date));
+
+  const [description, setDescription] = useState(
+		currentAward.description
+	);
+
+  const [whenDate, setWhenDate] = useState(
+		new Date(currentAward.when_date)
+	);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+
     const user_id = currentAward.user_id;
     const when_date = whenDate.toISOString().split("T")[0];
+
 
     await Api.put(`awards/${currentAward.id}`, {
       user_id,
       title,
       description,
-      authority,
       when_date,
     });
     
+		
     const res = await Api.get("awardlist", user_id);
     
     setAwards(res.data);
@@ -33,7 +44,7 @@ function AwardEditForm({ currentAward, setIsEditing, setAwards }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="awardAddTitle">
+      <Form.Group controlId="awardEditTitle">
         <Form.Control
           type="text"
           placeholder="수상내역"
@@ -42,21 +53,12 @@ function AwardEditForm({ currentAward, setIsEditing, setAwards }) {
         />
       </Form.Group>
 
-      <Form.Group controlId="awardAddDescription" className="mt-3">
+      <Form.Group controlId="awardEditDescription" className="mt-3">
         <Form.Control
           type="text"
           placeholder="상세내역"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-        />
-      </Form.Group>
-
-      <Form.Group controlId="awardAddAuthority" className="mt-3">
-        <Form.Control
-          type="text"
-          placeholder="발급기관"
-          value={authority}
-          onChange={(e) => setAuthority(e.target.value)}
         />
       </Form.Group>
 

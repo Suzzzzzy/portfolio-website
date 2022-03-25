@@ -2,6 +2,14 @@ import { Schema, model } from "mongoose";
 
 const CertificateSchema = new Schema(
     {
+        id: { 
+            type: String,
+            required: true,
+        },
+        user_id: {
+            type: String,
+            required: true,
+        },
         title: {
             type: String,
             required: true,
@@ -14,7 +22,8 @@ const CertificateSchema = new Schema(
 
         when_date: {
             type: String,
-            required: true,
+            required: false,
+            default: Date.now(),
         },
 
 
@@ -22,8 +31,8 @@ const CertificateSchema = new Schema(
     {
         timestamps: true,
     }
-);
+); 
 
 const CertificateModel = model("Certificate", CertificateSchema);
-
+ 
 export { CertificateModel };
