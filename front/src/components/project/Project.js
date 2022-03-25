@@ -3,20 +3,20 @@ import ProjectCard from "./ProjectCard";
 import ProjectEditForm from "./ProjectEditForm";
 // import * as Api from "../../api";
 
-function Project({ project, setProjects, isEditable }) {
+function Project({ Project, setProjects, isEditable }) {
     const [isEditing, setIsEditing] = useState(false);
 
     return (
         <>
             {isEditing ? (
                 <ProjectEditForm
-                    currentProject={project}
+                    currentProject={Project}
                     setProjects={setProjects}
                     setIsEditing={setIsEditing}
                 />
             ) : (
                 <ProjectCard
-                    project={project}
+                    Project={Project}
                     isEditable={isEditable}
                     setIsEditing={setIsEditing}
                 />
