@@ -20,7 +20,7 @@ function PLs({ portfolioOwnerId, isEditable }) {
   return (
     <Card>
       <Card.Body>
-        <Card.Title>Programming Language</Card.Title>
+        <Card.Title>프로그래밍 언어</Card.Title>
         {pls.map((pl) => (
           <PL
             key={pl.id}
