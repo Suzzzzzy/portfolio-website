@@ -9,7 +9,7 @@ function Education({ education, setEducations, isEditable }) {
         <>
             {isEditing ? (
                 <EducationEditForm
-                    currenteducation={education}
+                    currentEducation={education}
                     setEducations={setEducations}
                     setIsEditing={setIsEditing}
                 />
