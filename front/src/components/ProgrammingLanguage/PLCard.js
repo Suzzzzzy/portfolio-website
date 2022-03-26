@@ -11,7 +11,7 @@ function PLCard({ pl, isEditable, setIsEditing, setPLs }) {
     const user_id = pl.user_id;
     try {
       if (window.confirm("삭제 하시겠습니까?")) {
-        await Api.delete(`certificates/${pl.id}`);
+        await Api.delete(`pls/${pl.id}`);
         const res = await Api.get("pllist", user_id);
         setPLs(res.data);
       }

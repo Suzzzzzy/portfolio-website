@@ -36,8 +36,8 @@ static async update({ _id, fieldToUpdate, newValue }) {
 }
 
 // 삭제하기
-static async deleteByid({ _id }) {
-  const deleted = await ProgrammingLanguage_Model.deleteOne({ _id });
+static async deleteById({ _id }) {
+  const deleted = await ProgrammingLanguage_Model.deleteOneAndDelete({ id:_id });
   return deleted;
 }
 

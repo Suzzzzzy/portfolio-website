@@ -4,16 +4,12 @@ import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
 
 class programmingLanguageService {
-  static async addProgrammingLanguage({ _id, title, proficiency}) {
-    
+  static async addProgrammingLanguage({ user_id, position, proficiency}) {
+    const _id = uuidv4();
     // 상장 추가하기(CREATE)
-      // 상장 중복 확인
-    const programmingLanguage = await Award.findById({_id});
-      if (programmingLanguage) {
-        const errorMessage = "이미 존재하는 수상정보입니다."
-        return { errorMessage }
-      }
-    const newProgrammingLanguage = ({ title, proficiency })
+    const programmingLanguage = await ProgrammingLanguage.findById({_id});
+
+    const newProgrammingLanguage = ({ id: _id, user_id, position, proficiency })
     const creatednewProgrammingLanguage = await ProgrammingLanguage.create({ newProgrammingLanguage });
     creatednewProgrammingLanguage.errorMessage = null; // 문제 없이 db 저장 완료되었으므로 에러가 없음.
 
@@ -28,26 +24,23 @@ class programmingLanguageService {
 
    // 사용자 상장list 불러오기
    static async getProgrammingLanguageList({ user_id }) {
-    const programmingLanguageList = await ProgrammingLanguage.findById({ user_id });
-      if (!programmingLanguageList) {
-        const errorMessage = "수상내역이 존재하지 않습니다.";
-        return { errorMessage };
-      }
+    const programmingLanguageList = await ProgrammingLanguage.findByAll({ user_id });
+
     return programmingLanguageList;
   }
 
    // 상장 수정하기
-   static async setProgrammingLanguage({_id, toUpdate}) {
+   static async setProgrammingLanguage({_id, toUpdate, user_id}) {
      let programmingLanguage = await ProgrammingLanguage.findById(_id);
 
-     if (toUpdate.title) {
-       const fieldToUpdate = "title";
-       const newValue = toUpdate.title;
+     if (toUpdate.position) {
+       const fieldToUpdate = "position";
+       const newValue = toUpdate.position;
        programmingLanguage = await ProgrammingLanguage.update({_id, fieldToUpdate, newValue})
      }
-     if (toUpdate.description) {
+     if (toUpdate.proficiency) {
       const fieldToUpdate = "proficiency";
-      const newValue = toUpdate.description;
+      const newValue = toUpdate.proficiency;
       programmingLanguage = await programmingLanguage.update({_id, fieldToUpdate, newValue})
     }
     return programmingLanguage; 
@@ -56,11 +49,8 @@ class programmingLanguageService {
    // 상장 삭제하기
    static async deleteProgrammingLanguage({ _id }) {
     const deleted = await ProgrammingLanguage.deleteById({ _id });
-      if (!deleted) {
-        const errorMessage = "수상내역이 존재하지 않습니다.";
-        return { errorMessage };
-      }
-    return { status: "delete!"}
+
+    return deleted;
   }
 
 
