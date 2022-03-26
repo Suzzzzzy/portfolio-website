@@ -12,11 +12,11 @@ const ProgrammingLanguage_Schema = new Schema(
     },
     position: {
       type: String,
-      required: false,
+      required: true,
     },
     proficiency: {
       type: String,
-      required: true,
+      required: false,
     },
   },
   {
