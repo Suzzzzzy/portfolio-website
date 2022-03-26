@@ -38,8 +38,8 @@ programmingLanguageRouter.post("/pl/create", async function (req, res, next) {
   // 사용자의 언어 한개 조회
 programmingLanguageRouter.get("/pl/:id", login_required, async function (req, res, next) {
   try {
-    const _id = req.params.id;
-    const programmingLanguage = await programmingLanguageService.getProgrammingLanguage({ _id });
+    const plId = req.params.id;
+    const programmingLanguage = await programmingLanguageService.getProgrammingLanguage({ plId, });
 
     if (programmingLanguage.errorMessage) {
       throw new Error(programmingLanguage.errorMessage);
@@ -75,15 +75,15 @@ programmingLanguageRouter.get("/pl/:id", login_required, async function (req, re
 programmingLanguageRouter.put("/pls/:id", login_required, async function (req, res, next) {
     try {
       // URI로부터 언어 사용자 id를 추출함.
-      const _id = req.params.id;
+      const plId = req.params.id;
       // body data 로부터 업데이트할 언어 정보를 추출함.
       const position = req.body.position ?? null;
       const Proficiency = req.body.Proficiency ?? null;
 
-      const toUpdate = { position, Proficiency};
+      const toUpdate = {position, Proficiency};
 
       // 해당 사용자 아이디로 언어 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
-      const updatedProgrammingLanguage = await programmingLanguageService.setProgrammingLanguage({ _id, toUpdate });
+      const updatedProgrammingLanguage = await programmingLanguageService.setProgrammingLanguage({ plId, toUpdate });
 
       if (updatedProgrammingLanguage.errorMessage) {
         throw new Error(updatedProgrammingLanguage.errorMessage);
@@ -99,8 +99,8 @@ programmingLanguageRouter.put("/pls/:id", login_required, async function (req, r
 // 언어 삭제하기
 programmingLanguageRouter.delete("/pls/:id", login_required, async function (req, res, next) {
   try {
-    const _id = req.params.id;
-    const deleted = await programmingLanguageService.deleteProgrammingLanguage({ _id });
+    const plId= req.params.id;
+    const deleted = await programmingLanguageService.deleteProgrammingLanguage({ plId });
 
 
     res.status(200).json(deleted);

@@ -14,9 +14,9 @@ const ProgrammingLanguage_Schema = new Schema(
       type: String,
       required: true,
     },
-    proficiency: {
+    Proficiency: {
       type: String,
-      required: false,
+      required: true,
     },
   },
   {
