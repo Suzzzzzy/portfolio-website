@@ -56,7 +56,7 @@ programmingLanguageRouter.get("/pl/:id", login_required, async function (req, re
  programmingLanguageRouter
 .get("/pllist/:user_id", login_required, async function (req, res, next) {
   try {
-    const user_id = req.params.id;
+    const user_id = req.params.user_id;
     const programmingLanguageList = await programmingLanguageService.getProgrammingLanguageList({ user_id });
 
     if (programmingLanguageList.errorMessage) {

@@ -10,7 +10,7 @@ class ProgrammingLanguage {
 
 // 선택한 ProgrammingLanguage 불러오기
 static async findById({ _id }) {
-  const ProgrammingLanguage = await ProgrammingLanguage_Model.findOne({ _id: _id });
+  const ProgrammingLanguage = await ProgrammingLanguage_Model.findOne({ id: _id });
   return ProgrammingLanguage;
 }
 
