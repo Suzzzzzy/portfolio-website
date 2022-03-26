@@ -9,8 +9,8 @@ class ProgrammingLanguage {
   }
 
 // 선택한 ProgrammingLanguage 불러오기
-static async findById({ _id }) {
-  const ProgrammingLanguage = await ProgrammingLanguage_Model.findOne({ _id: _id });
+static async findById({ plId }) {
+  const ProgrammingLanguage = await ProgrammingLanguage_Model.findOne({ id: plId });
   return ProgrammingLanguage;
 }
 
@@ -21,8 +21,8 @@ static async findByAll({ user_id }) {
 }
 
 // 사용자 ProgrammingLanguage 수정하기
-static async update({ _id, fieldToUpdate, newValue }) {
-  const filter = { _id: _id }; 
+static async update({ plId, fieldToUpdate, newValue }) {
+  const filter = { id: plId }; 
   const update = { [fieldToUpdate]: newValue };
   const option = { returnOriginal: false };
     
@@ -36,8 +36,8 @@ static async update({ _id, fieldToUpdate, newValue }) {
 }
 
 // 삭제하기
-static async deleteByid({ _id }) {
-  const deleted = await ProgrammingLanguage_Model.deleteOne({ _id });
+static async deleteById({ plId }) {
+  const deleted = await ProgrammingLanguage_Model.findOneAndDelete({ id:plId });
   return deleted;
 }
 

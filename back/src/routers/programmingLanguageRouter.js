@@ -5,7 +5,7 @@ import { programmingLanguageService } from "../services/programmingLanguageServi
 
 const programmingLanguageRouter = Router();
 // 언어 추가하기(Create)
-programmingLanguageRouter.post("/programmingLanguage/create", async function (req, res, next) {
+programmingLanguageRouter.post("/pl/create", async function (req, res, next) {
   try {
     if (is.emptyObject(req.body)) {
       throw new Error(
@@ -13,13 +13,15 @@ programmingLanguageRouter.post("/programmingLanguage/create", async function (re
       );
     }
     // req (request) 에서 데이터 가져오기
-    const title= req.body.title;
-    const proficiency = req.body.proficiency;
+    const user_id = req.body.user_id;
+    const position= req.body.position;
+    const Proficiency = req.body.Proficiency;
 
-    // 위 데이터를 Award db에 추가하기
+    // 위 데이터를 db에 추가하기
     const newProgrammingLanguage = await programmingLanguageService.addProgrammingLanguage({
-      title,
-      proficiency,
+      user_id,
+      position,
+      Proficiency,
     });
 
     if (newProgrammingLanguage.errorMessage) {
@@ -34,16 +36,16 @@ programmingLanguageRouter.post("/programmingLanguage/create", async function (re
 });
 
   // 사용자의 언어 한개 조회
-programmingLanguageRouter.get("/programmingLanguages/:id", login_required, async function (req, res, next) {
+programmingLanguageRouter.get("/pl/:id", login_required, async function (req, res, next) {
   try {
-    const _id = req.params.id;
-    const award = await programmingLanguageService.getAward({ _id });
+    const plId = req.params.id;
+    const currentprogrammingLanguage = await programmingLanguageService.getProgrammingLanguage({ plId, });
 
-    if (award.errorMessage) {
-      throw new Error(award.errorMessage);
+    if (currentprogrammingLanguage.errorMessage) {
+      throw new Error(currentprogrammingLanguage.errorMessage);
     }
 
-    res.status(200).json(award);
+    res.status(200).json(currentprogrammingLanguage);
   } catch (error) {
     next(error);
   }
@@ -52,9 +54,9 @@ programmingLanguageRouter.get("/programmingLanguages/:id", login_required, async
 
  // 사용자가 등록한 언어list 조회
  programmingLanguageRouter
-.get("/programmingLanguageList/:user_id", login_required, async function (req, res, next) {
+.get("/pllist/:user_id", login_required, async function (req, res, next) {
   try {
-    const user_id = req.params.id;
+    const user_id = req.params.user_id;
     const programmingLanguageList = await programmingLanguageService.getProgrammingLanguageList({ user_id });
 
     if (programmingLanguageList.errorMessage) {
@@ -70,18 +72,18 @@ programmingLanguageRouter.get("/programmingLanguages/:id", login_required, async
 
 
   //언어 수정하기(Update)
-programmingLanguageRouter.put("/programmingLanguages/:id", login_required, async function (req, res, next) {
+programmingLanguageRouter.put("/pls/:id", login_required, async function (req, res, next) {
     try {
       // URI로부터 언어 사용자 id를 추출함.
-      const _id = req.params.id;
+      const plId = req.params.id;
       // body data 로부터 업데이트할 언어 정보를 추출함.
-      const title = req.body.title ?? null;
-      const proficiency = req.body.proficiency ?? null;
+      const position = req.body.position ?? null;
+      const Proficiency = req.body.Proficiency ?? null;
 
-      const toUpdate = { title, proficiency};
+      const toUpdate = {position, Proficiency};
 
       // 해당 사용자 아이디로 언어 정보를 db에서 찾아 업데이트함. 업데이트 요소가 없을 시 생략함
-      const updatedProgrammingLanguage = await programmingLanguageService.setProgrammingLanguage({ _id, toUpdate });
+      const updatedProgrammingLanguage = await programmingLanguageService.setProgrammingLanguage({ plId, toUpdate });
 
       if (updatedProgrammingLanguage.errorMessage) {
         throw new Error(updatedProgrammingLanguage.errorMessage);
@@ -95,16 +97,13 @@ programmingLanguageRouter.put("/programmingLanguages/:id", login_required, async
 );
 
 // 언어 삭제하기
-programmingLanguageRouter.delete("/programmingLanguage/:id", login_required, async function (req, res, next) {
+programmingLanguageRouter.delete("/pls/:id", login_required, async function (req, res, next) {
   try {
-    const _id = req.params.id;
-    const deleted = await programmingLanguageService.deleteProgrammingLanguage({ _id });
+    const plId= req.params.id;
+    const deleted = await programmingLanguageService.deleteProgrammingLanguage({ plId });
 
-    if (deleted.errorMessage) {
-      throw new Error(deleted.errorMessage);
-    }
 
-    res.status(200).json(deleted, "삭제가 완료되었습니다.");
+    res.status(200).json(deleted);
   } catch (error) {
     next(error);
   }

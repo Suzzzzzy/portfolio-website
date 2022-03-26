@@ -2,13 +2,21 @@ import { Schema, model } from "mongoose";
 
 const ProgrammingLanguage_Schema = new Schema(
   {
-    title: {
+    id: {
       type: String,
       required: true,
     },
-    proficiency: {
+    user_id: { 
+      type: String, 
+      required: true
+    },
+    position: {
       type: String,
-      required: false,
+      required: true,
+    },
+    Proficiency: {
+      type: String,
+      required: true,
     },
   },
   {

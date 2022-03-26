@@ -11,7 +11,7 @@ function PLCard({ pl, isEditable, setIsEditing, setPLs }) {
     const user_id = pl.user_id;
     try {
       if (window.confirm("삭제 하시겠습니까?")) {
-        await Api.delete(`certificates/${pl.id}`);
+        await Api.delete(`pls/${pl.id}`);
         const res = await Api.get("pllist", user_id);
         setPLs(res.data);
       }
@@ -25,11 +25,9 @@ function PLCard({ pl, isEditable, setIsEditing, setPLs }) {
     <Card.Text>
       <Row className="align-items-center">
         <Col>
-          <span>{pl.school}</span>
+          <span>{pl.Proficiency}</span>
           <br />
-          <span className="text-muted">{`${pl.major} (${
-            pl.position || ""
-          })`}</span>
+          <span className="text-muted">{`${pl.position}`}</span>
         </Col>
         {isEditable && (
           <Col xs lg="1">
