@@ -40,7 +40,7 @@ class programmingLanguageService {
      if (toUpdate.Proficiency) {
       const fieldToUpdate = "Proficiency";
       const newValue = toUpdate.Proficiency;
-      programmingLanguage = await programmingLanguage.update({plId, fieldToUpdate, newValue})
+      programmingLanguage = await ProgrammingLanguage.update({plId, fieldToUpdate, newValue})
     }
     return programmingLanguage; 
    } 

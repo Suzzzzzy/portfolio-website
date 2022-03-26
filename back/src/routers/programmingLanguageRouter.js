@@ -39,13 +39,13 @@ programmingLanguageRouter.post("/pl/create", async function (req, res, next) {
 programmingLanguageRouter.get("/pl/:id", login_required, async function (req, res, next) {
   try {
     const plId = req.params.id;
-    const programmingLanguage = await programmingLanguageService.getProgrammingLanguage({ plId, });
+    const currentprogrammingLanguage = await programmingLanguageService.getProgrammingLanguage({ plId, });
 
-    if (programmingLanguage.errorMessage) {
-      throw new Error(programmingLanguage.errorMessage);
+    if (currentprogrammingLanguage.errorMessage) {
+      throw new Error(currentprogrammingLanguage.errorMessage);
     }
 
-    res.status(200).json(programmingLanguage);
+    res.status(200).json(currentprogrammingLanguage);
   } catch (error) {
     next(error);
   }
