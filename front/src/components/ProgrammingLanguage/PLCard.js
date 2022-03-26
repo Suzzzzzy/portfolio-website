@@ -25,9 +25,9 @@ function PLCard({ pl, isEditable, setIsEditing, setPLs }) {
     <Card.Text>
       <Row className="align-items-center">
         <Col>
-          <span>{pl.school}</span>
+          <span>{pl.proficiency}</span>
           <br />
-          <span className="text-muted">{`${pl.major} (${
+          <span className="text-muted">{`${pl.proficiency} (${
             pl.position || ""
           })`}</span>
         </Col>

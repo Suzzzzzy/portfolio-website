@@ -16,7 +16,8 @@ const ProgrammingLanguage_Schema = new Schema(
     },
     proficiency: {
       type: String,
-      required: false,
+      required: true,
+      default: '몰라레후',
     },
   },
   {
