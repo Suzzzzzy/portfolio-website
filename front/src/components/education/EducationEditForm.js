@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button, Form, Col, Row } from "react-bootstrap";
-import DatePicker from "react-datepicker";
 import * as Api from "../../api";
 
 function EducationEditForm({
@@ -15,8 +14,9 @@ function EducationEditForm({
         currentEducation.description
     );
 
-    const [whenDate, setWhenDate] = useState(
-        new Date(currentEducation.when_date)
+
+    const [position, setPosition] = useState(
+        currentEducation.position
     );
 
     const handleSubmit = async (e) => {
@@ -24,14 +24,13 @@ function EducationEditForm({
 
 
         const user_id = currentEducation.user_id;
-        const when_date = whenDate.toISOString().split("T")[0];
 
 
         await Api.put(`educations/${currentEducation.id}`, {
             user_id,
             title,
             description,
-            when_date,
+            position,
         });
 
 
@@ -56,20 +55,21 @@ function EducationEditForm({
             <Form.Group controlId="educationEditDescription" className="mt-3">
                 <Form.Control
                     type="text"
-                    placeholder="상세내역"
+                    placeholder="전공"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                 />
             </Form.Group>
 
-            <Form.Group as={Row} className="mt-3">
-                <Col xs="auto">
-                    <DatePicker
-                        selected={whenDate}
-                        onChange={(date) => setWhenDate(date)}
-                    />
-                </Col>
+            <Form.Group controlId="educationPosition" className="mt-3">
+                <Form.Control
+                    type="text"
+                    placeholder="학위"
+                    value={position}
+                    onChange={(e) => setPosition(e.target.value)}
+                />
             </Form.Group>
+
 
             <Form.Group as={Row} className="mt-3 text-center mb-4">
                 <Col sm={{ span: 20 }}>
