@@ -1,5 +1,7 @@
 # 올뺌이삼 포트폴리오 공유 웹 서비스 🦉
 
+<img width="1000" alt="porfolioEX" src="https://user-images.githubusercontent.com/49335804/160242124-bca8e8c3-2be2-400c-b419-8b67e49a43e6.png">
+
 이 프로젝트는 자기자신의 포트폴리오를 작성하고, 또한 다른 사람의 포트폴리오를 확인할 수 있는 웹 서비스입니다. \
 웹 서비스 링크: elice-kdt-ai-4th-team23.elicecoding.com
 
