@@ -13,7 +13,7 @@ function EducationCard({ education, isEditable, setIsEditing, setEducations }) {
         try {
             if (window.confirm("삭제 하시겠습니까?")) {
                 await Api.delete(`educations/${education.id}`);
-                const res = await Api.get("educationtlist", user_id);
+                const res = await Api.get("educationlist", user_id);
                 setEducations(res.data);
             }
         } catch (err) {
