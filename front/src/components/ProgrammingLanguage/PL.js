@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PLCard from "./PLCard";
 import PLEditForm from "./PLEditForm";
 
-function PL({ pl, setPLs, isPL }) {
+function PL({ pl, setPLs, isEditable }) {
 
   const [isEditing, setIsEditing] = useState(false);
   return (
@@ -16,8 +16,9 @@ function PL({ pl, setPLs, isPL }) {
       ) : (
         <PLCard
           pl={pl}
-          isPL={isPL}
+          isEditable={isEditable}
           setIsEditing={setIsEditing}
+          setPLs = {setPLs}
         />
       )}
     </>
